@@ -12,6 +12,7 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
     	$posts = Post::all();
@@ -36,7 +37,25 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+                'title' => 'required',
+                'description' => 'required',
+                'image' => 'image|required|max:1999'
+        ]);
+        $fWx = Post::all();
+        $fWx->count();
+        //return var_dump($request->file());
+        $ayy = ($fWx->count()+1).'.'.$request->file('image')->getClientOriginalExtension();
+
+        $lmao = new Post();
+        $lmao->title = $request->title;
+        $lmao->description = $request->description;
+
+        $request->file('image')->storeAs('public/', $ayy);
+        $lmao->url = $ayy;
+        $lmao->save();
+        return redirect('/');
     }
 
     /**

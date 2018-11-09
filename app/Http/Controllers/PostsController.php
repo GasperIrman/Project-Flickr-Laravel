@@ -13,6 +13,8 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+
+
     public function index()
     {
     	$posts = Post::all();
@@ -54,8 +56,9 @@ class PostsController extends Controller
 
         $request->file('image')->storeAs('public/', $ayy);
         $lmao->url = $ayy;
+        $lmao->user_id = auth()->user()->id;
         $lmao->save();
-        return redirect('/');
+        return redirect('/')->with('success', 'Post was created successfully!');
     }
 
     /**
@@ -77,7 +80,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -89,7 +92,22 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        if(!empty($request->input('title')))
+        {
+            $post->title = $request->input('title');
+            $post->save();
+            return redirect()->back()->with('success', 'Post title edited successfully');
+
+        }
+        if(!empty($request->input('description')))
+        {
+            $post->description = $request->input('description');
+            $post->save();
+            return redirect()->back()->with('success', 'Post description edited successfully');
+
+        }
+        return redirect()->back()->with('error', 'No value specified for title / description');
     }
 
     /**
@@ -100,6 +118,9 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+
+        return redirect()->back()->with('success', 'Post deleted successfully');
     }
 }

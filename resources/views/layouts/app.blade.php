@@ -22,10 +22,17 @@
 <body>
     <div id="app">
     	@include('inc.navbar')
-    	@include('inc.errors')
+
         <main class="container">
+        	<br>
+        	@include('inc.errors')
             @yield('content')
+            @include('inc.script')
+            <hr>
+            Copyright © Gašper Irman 2018<br><br>
         </main>
+
     </div>
+
 </body>
 </html>

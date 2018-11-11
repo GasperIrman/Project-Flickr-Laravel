@@ -8,7 +8,7 @@
     	</div>
 
     	<div class="form-group">
-    		{{ Form::text('description', '', ['class' => 'form-control', 'placeholder' => 'Description']) }}
+    		{{ Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'Description']) }}
     	</div>
 
     	<div class="form-group">

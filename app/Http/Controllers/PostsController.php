@@ -17,7 +17,7 @@ class PostsController extends Controller
 
     public function index()
     {
-    	$posts = Post::all();
+    	$posts = Post::orderBy('created_at', 'desc')->get();
         return view('posts.home')->with('posts', $posts);
     }
 
@@ -39,16 +39,17 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-
+        $videos = array('avi', 'mpeg', 'mp4');
+       // return var_dump(in_array($request->file('image')->getClientOriginalExtension(), $videos));
         $request->validate([
                 'title' => 'required',
                 'description' => 'required',
-                'image' => 'image|required|max:1999'
+                'image' => 'mimes:video/avi,mp4,video/mpeg,video/quicktime,jpeg,bmp,png,jpg,gif|required|max:19999'
         ]);
-        $fWx = Post::all();
-        $fWx->count();
+        
+        $fWx = Post::latest()->first();
         //return var_dump($request->file());
-        $ayy = ($fWx->count()+1).'.'.$request->file('image')->getClientOriginalExtension();
+        $ayy = ($fWx->id +1).'.'.$request->file('image')->getClientOriginalExtension();
 
         $lmao = new Post();
         $lmao->title = $request->title;
@@ -57,6 +58,12 @@ class PostsController extends Controller
         $request->file('image')->storeAs('public/', $ayy);
         $lmao->url = $ayy;
         $lmao->user_id = auth()->user()->id;
+        if(in_array($request->file('image')->getClientOriginalExtension(), $videos, true))
+        {
+            return var_dump(in_array($request->file('image')->getClientOriginalExtension(), $videos, true));
+            $lmao->video = true;
+            $lmao->type = $request->file('image')->getClientOriginalExtension();
+        }
         $lmao->save();
         return redirect('/')->with('success', 'Post was created successfully!');
     }

@@ -1,0 +1,33 @@
+.myButton {
+        -moz-box-shadow: 0px 0px 0px 0px #f0f7fa;
+        -webkit-box-shadow: 0px 0px 0px 0px #f0f7fa;
+        box-shadow: 0px 0px 0px 0px #f0f7fa;
+
+        background-color:#33bdef;
+        -moz-border-radius:9px;
+        -webkit-border-radius:9px;
+        border-radius:9px;
+        border:1px solid #057fd0;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:15px;
+        font-weight:bold;
+        padding:8px 28px;
+        text-decoration: none;
+        text-shadow:0px -1px 0px #5b6178;
+        transition: background-color 2s;
+    }
+
+.myButton:hover{
+
+    text-decoration: none;
+    animation: hmm 0.4s forwards;
+}
+ 
+ @keyframes hmm
+ {
+    from{background-color:#33bdef; color: #FFFFFF;}
+    to{background-color:#1c6e8c; color: #FFFFFF;}
+ }

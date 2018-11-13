@@ -22,3 +22,6 @@ Route::get('/users/{id}', 'ProfileController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/users/{id}/{id2}', 'ProfileController@follow');
+Route::delete('/users/{id}/{id2}', 'ProfileController@unfollow');

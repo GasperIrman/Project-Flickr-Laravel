@@ -10491,6 +10491,10 @@ a.text-dark:focus {
   transition: background-color 2s;
 }
 
+.red {
+  background-color: #ff2b2b;
+}
+
 .myButton:hover {
   text-decoration: none;
   -webkit-animation: hmm 0.4s forwards;
@@ -10499,24 +10503,24 @@ a.text-dark:focus {
 
 @-webkit-keyframes hmm {
   from {
-    background-color: #33bdef;
+    background-color: inherit;
     color: #FFFFFF;
   }
 
   to {
-    background-color: #1c6e8c;
+    background-color: #666666;
     color: #FFFFFF;
   }
 }
 
 @keyframes hmm {
   from {
-    background-color: #33bdef;
+    background-color: inherit;
     color: #FFFFFF;
   }
 
   to {
-    background-color: #1c6e8c;
+    background-color: #666666;
     color: #FFFFFF;
   }
 }

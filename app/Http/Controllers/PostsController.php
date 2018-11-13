@@ -63,7 +63,6 @@ class PostsController extends Controller
         $lmao->user_id = auth()->user()->id;
         if(in_array($request->file('image')->getClientOriginalExtension(), $videos, true))
         {
-            return var_dump(in_array($request->file('image')->getClientOriginalExtension(), $videos, true));
             $lmao->video = true;
             $lmao->type = $request->file('image')->getClientOriginalExtension();
         }

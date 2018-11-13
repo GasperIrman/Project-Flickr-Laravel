@@ -2,15 +2,25 @@
 
 @section('content')
 	<div>
-		@if(isset(auth()->user()->id))
+		@if(Auth::check())
 			@if(auth()->user()->id == $user->id)
 				<h1 style="display: inline-block">My profile</h1>
+			@else
+				<h1 style="display: inline-block">{{$user->name}}'s profile</h1>
+				@if(App\Follow::where('follower_id', '=', auth()->user()->id, 'AND', 'followed_id', '=', $user->id))
+				{!! Form::open(['action' => ['ProfileController@unfollow', auth()->user()->id, $user->id]]) !!}
+					<button class="myButton float-right red">Unfollow</a>
+				{!! FOrm::close() !!}
+				@else
+					<a href="{{ action('ProfileController@follow', [auth()->user()->id, $user->id]) }}" class="myButton float-right">Follow</a>
+					}
+				@endif
 			@endif
 		@else
 			<h1 style="display: inline-block">{{$user->name}}'s profile</h1>
 		@endif
-			<a href="#" class="myButton float-right">follow</a>
-		</div>
+		
+	</div>
 	@if(count($user->post) > 0)
 		@foreach($user->post->sortByDesc('created_at') as $post)
 			<div class="well" style="margin-bottom: 70px; margin-top: 20px; text-align: center; padding-left: 30px; border-left: solid 3px #343a40;">

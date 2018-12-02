@@ -17,7 +17,7 @@
 						{!! Form::open(['action' => ['PostsController@update', $post->id], 'id' => 'editTitle'.$post->id, 'style' => 'display: inline-block; float:left; margin-left: 10px; visibility: hidden']) !!}
 							{{Form::hidden('_method', 'PUT')}}
 							{{Form::text('title', $post->title, ['placeholder' => 'Edit title', 'style' => 'margin-left: 10px'])}}
-							{{Form::submit('Submit', ['class' => 'btn btn-secondary'])}}
+							{{Form::submit('Submit', ['class' => 'btn btn-secondary editSubmit'])}}
 						{!! Form::close() !!}
 
 						

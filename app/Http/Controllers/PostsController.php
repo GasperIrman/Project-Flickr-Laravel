@@ -99,24 +99,16 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $this->validate($request, [
+            'body' => 'required',
+        ]);
+        $id = $request['post_id'];
         $post = Post::find($id);
-        if(!empty($request->input('title')))
-        {
-            $post->title = $request->input('title');
-            $post->save();
-            return redirect()->back()->with('success', 'Post title edited successfully');
-
-        }
-        if(!empty($request->input('description')))
-        {
-            $post->description = $request->input('description');
-            $post->save();
-            return redirect()->back()->with('success', 'Post description edited successfully');
-
-        }
-        return redirect()->back()->with('error', 'No value specified for title / description');
+        $post->title = $request['body'];
+        $post->update();
+        return array('body' => $post->title);
     }
 
     /**

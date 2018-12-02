@@ -14,6 +14,15 @@
 Route::get('/', 'PostsController@index');
 
 Route::resource('posts', 'PostsController');
+
+
+
+Route::post('/edit', 'PostsController@update')->name('edit');
+
+
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
